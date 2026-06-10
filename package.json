@@ -1,0 +1,157 @@
+{
+  "name": "agentswarm-vscode",
+  "displayName": "AgentSwarm",
+  "description": "Launch and manage grids of agent terminals from the VS Code sidebar.",
+  "version": "0.0.6",
+  "publisher": "jnpcreates",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JNPCreates/agentswarm-vscode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JNPCreates/agentswarm-vscode/issues"
+  },
+  "homepage": "https://github.com/JNPCreates/agentswarm-vscode#readme",
+  "engines": {
+    "vscode": "^1.92.0"
+  },
+  "keywords": [
+    "agent",
+    "codex",
+    "terminal",
+    "swarm",
+    "ai"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
+  "activationEvents": [
+    "onView:agentswarm.controlsView",
+    "onCommand:agentswarm.launchGrid",
+    "onCommand:agentswarm.launchShells",
+    "onCommand:agentswarm.closeTerminals",
+    "onCommand:agentswarm.showSidebar"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "agentswarm.launchGrid",
+        "title": "AgentSwarm: Launch Terminal Grid",
+        "category": "AgentSwarm"
+      },
+      {
+        "command": "agentswarm.showSidebar",
+        "title": "AgentSwarm: Show Sidebar",
+        "category": "AgentSwarm"
+      },
+      {
+        "command": "agentswarm.launchShells",
+        "title": "AgentSwarm: Launch Shells Only",
+        "category": "AgentSwarm"
+      },
+      {
+        "command": "agentswarm.closeTerminals",
+        "title": "AgentSwarm: Close Agent Terminals",
+        "category": "AgentSwarm"
+      }
+    ],
+    "configuration": {
+      "title": "AgentSwarm",
+      "properties": {
+        "agentswarm.terminalCount": {
+          "type": "number",
+          "default": 4,
+          "minimum": 1,
+          "maximum": 16,
+          "description": "Default number of terminals to launch."
+        },
+        "agentswarm.rows": {
+          "type": "number",
+          "default": 2,
+          "minimum": 1,
+          "maximum": 4,
+          "description": "Default number of editor grid rows."
+        },
+        "agentswarm.columns": {
+          "type": "number",
+          "default": 2,
+          "minimum": 1,
+          "maximum": 4,
+          "description": "Default number of editor grid columns."
+        },
+        "agentswarm.startupCommand": {
+          "type": "string",
+          "default": "codex --yolo",
+          "description": "Command to send to each terminal when auto-run is enabled."
+        },
+        "agentswarm.autoRunStartupCommand": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically run the startup command in each launched terminal."
+        },
+        "agentswarm.terminalNamePrefix": {
+          "type": "string",
+          "default": "Codex",
+          "description": "Prefix used when naming launched terminals."
+        },
+        "agentswarm.cwd": {
+          "type": "string",
+          "default": "",
+          "description": "Working directory for launched terminals. Empty uses the first workspace folder."
+        },
+        "agentswarm.confirmYolo": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask for confirmation before auto-running commands that include --yolo."
+        },
+        "agentswarm.terminalLocation": {
+          "type": "string",
+          "default": "editorGrid",
+          "enum": [
+            "editorGrid",
+            "terminalPanel"
+          ],
+          "enumDescriptions": [
+            "Open terminals in the editor area using a grid layout.",
+            "Open terminals in the terminal panel using VS Code terminal splits."
+          ],
+          "description": "Where AgentSwarm launches terminal grids."
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "agentswarm",
+          "title": "AgentSwarm",
+          "icon": "resources/agentswarm.svg"
+        }
+      ]
+    },
+    "views": {
+      "agentswarm": [
+        {
+          "id": "agentswarm.controlsView",
+          "name": "Actions",
+          "type": "webview"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@types/vscode": "^1.92.0",
+    "typescript": "^5.5.4"
+  }
+}
