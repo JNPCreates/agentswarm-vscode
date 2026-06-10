@@ -15,6 +15,52 @@ It is built for workflows where you want several Codex sessions, shell sessions,
 - Close all AgentSwarm-launched terminals at once.
 - Use editor-grid terminals for a true row/column layout.
 
+## Install
+
+### Option 1: Install from a VSIX file
+
+1. Download the latest `.vsix` file from the GitHub Releases page.
+2. Open VS Code.
+3. Open the Extensions view.
+4. Click the `...` menu in the top-right of the Extensions view.
+5. Choose `Install from VSIX...`.
+6. Select the downloaded `.vsix` file.
+7. Reload VS Code if prompted.
+
+### Option 2: Install from the command line
+
+Download the latest `.vsix` file, then run:
+
+```powershell
+code --install-extension .\agentswarm-vscode-0.0.6.vsix
+```
+
+Use the actual filename you downloaded if the version number is different.
+
+### Build from source
+
+Clone the repository:
+
+```powershell
+git clone https://github.com/JNPCreates/agentswarm-vscode.git
+cd agentswarm-vscode
+```
+
+Install dependencies and build:
+
+```powershell
+npm install
+npm run compile
+```
+
+Package a local VSIX:
+
+```powershell
+npx @vscode/vsce package
+```
+
+Then install the generated `.vsix` using either install method above.
+
 ## Usage
 
 1. Open the AgentSwarm icon in the Activity Bar.
@@ -35,7 +81,7 @@ AgentSwarm defaults to `codex --yolo`, but it does not auto-run the command unle
 
 Commands that include `--yolo` can make broad filesystem changes. Review the workspace before launching multiple agents with auto-run enabled.
 
-## Development
+## Developer Workflow
 
 Install dependencies:
 
